@@ -1,4 +1,4 @@
-﻿(function(global){
+(function(global){
     
     // Function constructor for Timers
     function Timer(timerContainer){
@@ -26,6 +26,9 @@
         elements = self.container.getElementsByClassName('wefo-timer-start');
         for(i = 0; i < elements.length; i++){
             elements[i].onclick = function(){
+                if(self.status == 'expired'){
+                    self.updateTime();
+                }
                 self.setStatus(self.status == 'paused' ? 'continue' : 'run');
             };
         }
@@ -88,6 +91,7 @@
                 case 'run':
                     self.setStatus('running');
                     self.setEndTime();
+                    self.remaining = self.endTime - new Date().getTime();
                     break;
                 case 'running':
                     self.remaining = self.endTime - new Date().getTime();
@@ -109,7 +113,7 @@
         }
         
         //Schreibe Zeit in das Feld
-        var distance = self.remaining;
+        var distance = self.remaining + 999;
 
         // Time calculations for days, hours, minutes and seconds
         var days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -117,18 +121,16 @@
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        // Display the result in the element with id="demo"
+        // Display the result
         let r = days > 1 ? days + " Days " : "";
         r += days === 1 ? "1 Day " : "";
         r += hours > 0 ? ("00" + hours).slice(-2) + ":" : "";
         r += ("00" + minutes).slice(-2) + ":";
         r += ("00" + seconds).slice(-2);
-        if(distance >= 0){
-            self.container.getElementsByClassName('wefo-timer')[0].innerHTML = r;
-        }
+        self.container.getElementsByClassName('wefo-timer')[0].innerHTML = r;
 
         // If the count down is finished, write some text
-        if (distance < 0 && self.status !== 'expired') {
+        if (distance < 999 && self.status !== 'expired') {
             self.setStatus('expired');
             var link = self.container.getElementsByClassName('wefo-timer-timeout-link')[0];
             if(link){

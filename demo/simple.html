@@ -6,45 +6,75 @@
         
         <style>
             body{
-                width: 100px;
-                border: 1px solid #aaa;
-                border-radius: 5px;
-                margin: 2em auto;
-                padding: .5em;
+                width: 150px;
+                margin: 1em auto;
+                text-align: center;
+                font-size: 20px;
+                border: 2px solid #55e;
+                border-radius: 4px;
+                font-family: monospace;
             }
-            
-            div,
-            button,
-            span{
+            button{
                 display: block;
                 width: 100%;
-                box-sizing: border-box;
-                text-align: center;
-                margin: .5em 0;
+                border: none;
+                background-color: #55e;
+                padding: 0.3em;
+                color: #fff;
+                font-size: .8em;
+            }
+            .timer{
+                height: 2em;
+                line-height: 2;
+                font-size: 1.5em;
+                border-top-left-radius: 4px;
+                border-top-right-radius: 4px;
+                color: #666;
+            }
+            .settings{
+                background-color: #eee;
+                border-bottom-left-radius: 4px;
+                border-bottom-right-radius: 4px;
             }
             input{
-                display: block;
-                float: left;
-                width: 50%;
-                box-sizing: border-box;
-                text-align: center;
-                margin: 0;
-                padding: 0;
+                border: none;
+                font-size: .8em;
+                width: 3em;
+                background-color: transparent;
             }
-            div:after{
-                content: '';
+            input:first-child{
+                text-align: right;
+            }
+            .wefo-timer-stop{
+                display: none;
+            }
+            .running .wefo-timer-stop{
                 display: block;
-                clear: both;
+            }
+            .wefo-timer-start,
+            .settings{
+                display: block;
+            }
+            .running .wefo-timer-start,
+            .running .settings{
+                display: none;
+            }
+            .expired .timer{
+                background-color: #faa;
             }
         </style>
     </head>
     <body>
-        <span class="wefo-timer"></span>
-        <div>
-            <input class="wefo-timer-minutes" type="number" min="0" max="59">
-            <input class="wefo-timer-seconds" type="number" min="0" max="59">
+        <div class="timer">
+            <span class="wefo-timer"></span>
         </div>
         <button class="wefo-timer-start" type="button">Start</button>
+        <button class="wefo-timer-stop" type="button">Stop</button>
+        <div class="settings">
+            <input class="wefo-timer-minutes" type="number" min="0" max="59" value="0">
+            <span>:</span>
+            <input class="wefo-timer-seconds" type="number" min="0" max="59" value="0">
+        </div>
         <script src="../src/wefo-timer.js"></script>
     </body>
 </html>
