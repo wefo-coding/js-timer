@@ -96,6 +96,7 @@
                     self.setStatus('paused');
                     break;
                 case 'paused':
+                case 'expired':
                 case 'stopped':
                     break;
                 case 'stop':
@@ -125,9 +126,13 @@
         self.container.getElementsByClassName('wefo-timer')[0].innerHTML = r;
 
         // If the count down is finished, write some text
-        if (distance < 0) {
-            self.container.getElementsByClassName('wefo-timer')[0].innerHTML = "EXPIRED";
-            //self.container.getElementById('wefo-timer-timeout-link').click();
+        if (distance < 0 && self.status !== 'expired') {
+            self.container.getElementsByClassName('wefo-timer')[0].innerHTML = "00:00";
+            self.setStatus('expired');
+            var link = self.container.getElementsByClassName('wefo-timer-timeout-link')[0];
+            if(link){
+                link.click();
+            }
         }
     }
     
@@ -162,7 +167,8 @@
     
     // Sind keine Container vorhanden wird davon ausgegangen, dass nur ein Timer vorhanden ist.
     // Das Element <body> wird dann als Container angenommen.
-    if(timerContainers.length === 0){
+    if(!timerContainers || timerContainers.length === 0){
+        timerContainers = [];
         timerContainers.push(document.getElementsByTagName('body')[0]);
     }
     
