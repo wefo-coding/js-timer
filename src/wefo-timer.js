@@ -132,7 +132,7 @@
         // If the count down is finished, write some text
         if (distance < 999 && self.status !== 'expired') {
             self.setStatus('expired');
-            var link = self.container.getElementsByClassName('wefo-timer-timeout-link')[0];
+            var link = self.container.getElementsByClassName('wefo-timer-link')[0];
             if(link){
                 link.click();
             }
