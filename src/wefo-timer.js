@@ -123,11 +123,12 @@
         r += hours > 0 ? ("00" + hours).slice(-2) + ":" : "";
         r += ("00" + minutes).slice(-2) + ":";
         r += ("00" + seconds).slice(-2);
-        self.container.getElementsByClassName('wefo-timer')[0].innerHTML = r;
+        if(distance >= 0){
+            self.container.getElementsByClassName('wefo-timer')[0].innerHTML = r;
+        }
 
         // If the count down is finished, write some text
         if (distance < 0 && self.status !== 'expired') {
-            self.container.getElementsByClassName('wefo-timer')[0].innerHTML = "00:00";
             self.setStatus('expired');
             var link = self.container.getElementsByClassName('wefo-timer-timeout-link')[0];
             if(link){

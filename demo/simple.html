@@ -5,13 +5,46 @@
         <title>Simple Timer</title>
         
         <style>
+            body{
+                width: 100px;
+                border: 1px solid #aaa;
+                border-radius: 5px;
+                margin: 2em auto;
+                padding: .5em;
+            }
             
+            div,
+            button,
+            span{
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+                text-align: center;
+                margin: .5em 0;
+            }
+            input{
+                display: block;
+                float: left;
+                width: 50%;
+                box-sizing: border-box;
+                text-align: center;
+                margin: 0;
+                padding: 0;
+            }
+            div:after{
+                content: '';
+                display: block;
+                clear: both;
+            }
         </style>
     </head>
     <body>
-        <input class="wefo-timer-seconds" type="number" min="0" max="59">
-        <button class="wefo-timer-start" type="button">Start</button>
         <span class="wefo-timer"></span>
+        <div>
+            <input class="wefo-timer-minutes" type="number" min="0" max="59">
+            <input class="wefo-timer-seconds" type="number" min="0" max="59">
+        </div>
+        <button class="wefo-timer-start" type="button">Start</button>
         <script src="../src/wefo-timer.js"></script>
     </body>
 </html>
