@@ -178,14 +178,17 @@
     // Im folgenden findet die Initialisierung der einzelnen Timer statt.
     var timer;
     for(i = 0; i < timerContainers.length; i++){
-        timer = new Timer(timerContainers[i]);
-        timer.updateTime();
-        timers.push(timer);
-    }
-    
-    setInterval(function(){
-        for(i = 0; i < timers.length; i++){
-            timers[i].update();
+        if(timerContainers[i].getElementsByClassName('wefo-timer')[0]){
+            timer = new Timer(timerContainers[i]);
+            timer.updateTime();
+            timers.push(timer);
         }
-    }, 100);
+    }
+    if(timers.length > 0){
+        setInterval(function(){
+            for(i = 0; i < timers.length; i++){
+                timers[i].update();
+            }
+        }, 100);
+    }
 }(window));
