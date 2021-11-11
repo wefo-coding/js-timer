@@ -131,7 +131,11 @@
         r += hours > 0 ? ("00" + hours).slice(-2) + ":" : "";
         r += ("00" + minutes).slice(-2) + ":";
         r += ("00" + seconds).slice(-2);
-        self.container.getElementsByClassName('wefo-timer')[0].innerHTML = r;
+
+        let timerElements = self.container.getElementsByClassName('wefo-timer');
+        for (let i = 0; i < timerElements.length; i++) {
+            timerElements[i].innerHTML = r;
+        }
 
         // If the count down is finished, write some text
         if (distance < 999 && self.status !== 'expired') {
