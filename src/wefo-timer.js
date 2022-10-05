@@ -136,6 +136,17 @@
         for (let i = 0; i < timerElements.length; i++) {
             timerElements[i].innerHTML = r;
         }
+        
+        // Show alerts
+        let timerAlerts = self.container.querySelectorAll('[data-alert]');
+        for(let i  = 0; i < timerAlerts.length; i++){
+            if(self.status == 'running' && timerAlerts[i].getAttribute('data-alert') * 1000 > distance){
+                timerAlerts[i].style.display = 'initial';
+            }
+            else{
+                timerAlerts[i].style.display = 'none';
+            }
+        }
 
         // If the count down is finished, write some text
         if (distance < 999 && self.status !== 'expired') {
